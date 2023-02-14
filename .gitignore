@@ -1,0 +1,15 @@
+# jetbrains
+.idea
+
+# local data
+data/2016
+data/sas
+
+# python
+.venv
+__pycache__
+*.pyc
+Pipfile.lock
+
+# config
+capstone.cfg
