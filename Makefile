@@ -1,10 +1,16 @@
-.PHONY : airbyte airbyte-down build cassandra cassandra-down clean deploy destroy doc run spark spark-down spark-stop
+.PHONY : airbyte airbyte-down airflow airflow-down build cassandra cassandra-down clean deploy destroy doc run spark spark-down spark-stop
 
 airbyte:
 	docker-compose --project-directory='./airbyte' up -d
 
 airbyte-down:
 	docker-compose --project-directory='./airbyte' down
+
+airflow:
+	docker-compose --project-directory='./docker/airflow' up -d
+
+airflow-down:
+	docker-compose --project-directory='./docker/airflow' down
 
 cassandra:
 	docker-compose --project-directory='./docker/cassandra' up -d
