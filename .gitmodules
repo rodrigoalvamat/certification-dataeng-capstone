@@ -1,3 +1,1 @@
-[submodule "airbyte"]
-	path = airbyte
-	url = git@github.com:rodrigoalvamat/airbyte.git
+

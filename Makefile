@@ -1,16 +1,25 @@
-.PHONY : airbyte airbyte-down airflow airflow-down build cassandra cassandra-down clean deploy destroy doc run spark spark-down spark-stop
+.PHONY : airflow airflow-down build cassandra cassandra-down clean deploy destroy doc run spark spark-down spark-stop
 
-airbyte:
-	docker-compose --project-directory='./airbyte' up -d
-
-airbyte-down:
-	docker-compose --project-directory='./airbyte' down
+makefile_path  = $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+current_dir = $(makefile_path:/=)
 
 airflow:
-	docker-compose --project-directory='./docker/airflow' up -d
+	mkdir -p ./logs
+	echo -e "AIRFLOW_UID=$$(id -u)" > .env
+	docker compose up airflow-init
+	docker compose up -d
+#echo -e "AIRFLOW_PROJ_DIR=$(current_dir)" >> ./docker/airflow/.env
+#docker-compose --env-file='./docker/airflow/.env' --project-directory='./docker/airflow' up airflow-init
+#docker-compose --env-file='./docker/airflow/.env' --project-directory='./docker/airflow' up -d
 
 airflow-down:
-	docker-compose --project-directory='./docker/airflow' down
+	docker compose down --volumes --rmi all
+
+clean:
+	find ./src/dags -name '*.py[co]' -exec rm {} \;
+	find ./src/dags -name '__pycache__' -exec rm -rf ||: {}\;
+	find ./src/plugins -name '*.py[co]' -exec rm {} \;
+	find ./src/plugins -name '__pycache__' -exec rm -rf ||: {}\;
 
 cassandra:
 	docker-compose --project-directory='./docker/cassandra' up -d
