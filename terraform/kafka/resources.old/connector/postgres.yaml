@@ -1,0 +1,29 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: debezium-postgres-connector
+  labels:
+    strimzi.io/cluster: kafka-cluster
+spec:
+  class: io.debezium.connector.postgresql.PostgresConnector
+  tasksMax: 1
+  config:
+    plugin.name: pgoutput
+    database.server.name: postgresql
+    database.hostname: ${hostname}
+    database.port: 5432
+    database.dbname: ${database}
+    database.user: ${username}
+    database.password: ${password}
+
+    schema.include.list: public
+    table.include.list: public.outboxevent
+    tombstones.on.delete: false
+    transforms: outbox
+    transforms.outbox.type: io.debezium.transforms.outbox.EventRouter
+    transforms.outbox.route.topic.replacement: ${routedByValue}s-events
+    transforms.outbox.table.field.event.timestamp: timestamp
+    transforms.outbox.table.fields.additional.placement: type:header:eventType
+    value.converter: io.debezium.converters.ByteBufferConverter
+    value.converter.delegate.converter.type: org.apache.kafka.connect.json.JsonConverter
+    value.converter.delegate.converter.type.schemas.enable: true

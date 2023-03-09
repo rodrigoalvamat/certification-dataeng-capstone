@@ -1,0 +1,32 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: confluent-s3-source-connector
+  labels:
+    strimzi.io/cluster: kafka-cluster
+spec:
+  class: io.confluent.connect.s3.source.S3SourceConnector
+  tasksMax: 1
+  config:
+    mode: GENERIC
+    task.batch.size: 1
+    s3.poll.interval.ms: 200
+    # source
+    store.url: http://minio.minio-tenant.svc.cluster.local:80
+    s3.bucket.name: bank
+    aws.access.key.id: minio
+    aws.secret.access.key: minio123
+    # target
+    confluent.topic.bootstrap.servers: kafka-cluster-kafka-bootstrap:9092
+    confluent.topic.replication.factor: 1
+    # content
+    topics.dir: transfers-generated
+    topic.regex.list: transfers-generated:.*\.json
+    filename.regex: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\.json$"
+    # serialization
+    key.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    key.converter.schemas.enable: false
+    value.converter.schemas.enable: false
+    # format
+    format.class: io.confluent.connect.s3.format.json.JsonFormat

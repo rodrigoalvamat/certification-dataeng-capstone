@@ -1,0 +1,28 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: camel-minio-kafka-source-connector
+  labels:
+    strimzi.io/cluster: kafka-cluster
+spec:
+  class: org.apache.camel.kafkaconnector.miniosource.CamelMiniosourceSourceConnector
+  tasksMax: 1
+  config:
+    #source
+    camel.kamelet.minio-source.bucketName: transfers-generated
+    camel.kamelet.minio-source.autoCreateBucket: true
+    camel.kamelet.minio-source.deleteAfterRead: false
+    camel.kamelet.minio-source.endpoint: http://minio.minio-tenant.svc.cluster.local:80
+    camel.kamelet.minio-source.accessKey: minio
+    camel.kamelet.minio-source.secretKey: minio123
+    # target
+    topics: transfers-generated
+    # serialization
+    # camel.source.marshal: jackson
+    # camel.source.unmarshal: jackson
+    key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    key.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    key.converter.schemas.enable: false
+    value.converter.schemas.enable: false

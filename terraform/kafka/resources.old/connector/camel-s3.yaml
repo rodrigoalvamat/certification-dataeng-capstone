@@ -1,0 +1,27 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: camel-s3-kafka-source-connector
+  labels:
+    strimzi.io/cluster: kafka-cluster
+spec:
+  class: org.apache.camel.kafkaconnector.awss3source.CamelAwss3sourceSourceConnector
+  tasksMax: 1
+  config:
+    # options
+    camel.kamelet.aws-s3-source.deleteAfterRead: false
+    camel.kamelet.aws-s3-source.autoCreateBucket: false
+    camel.kamelet.aws-s3-source.delay: 200
+    # bucket
+    camel.kamelet.aws-s3-source.bucketNameOrArn: bank
+    camel.kamelet.aws-s3-source.prefix: transfers-generated/
+    # source
+    camel.kamelet.minio-source.endpoint: http://minio.minio-tenant.svc.cluster.local:80
+    camel.kamelet.aws-s3-source.region: us-east-1
+    camel.kamelet.aws-s3-source.accessKey: minio
+    camel.kamelet.aws-s3-source.secretKey: minio123
+    # target
+    topics: transfers-generated
+    # serialization
+    key.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter: org.apache.kafka.connect.json.JsonConverter

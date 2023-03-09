@@ -1,0 +1,108 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-kafka-cluster-0
+  namespace: kafka
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: directpv-min-io
+  volumeMode: Filesystem
+  volumeName: pvc-68fcf7dc-0610-42a9-a9aa-e685410a2e69
+  selector:
+    matchLabels:
+      hostname: inertia
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-kafka-cluster-1
+  namespace: kafka
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: directpv-min-io
+  volumeMode: Filesystem
+  volumeName: pvc-7246a9a7-2766-4592-89e5-84628935cd5f
+  selector:
+    matchLabels:
+      hostname: force
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-kafka-cluster-2
+  namespace: kafka
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: directpv-min-io
+  volumeMode: Filesystem
+  volumeName: pvc-455e0e43-6675-4798-8fa8-763fb37d5f90
+  selector:
+    matchLabels:
+      hostname: reaction
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-kafka-zookeeper-0
+  namespace: kafka
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: directpv-min-io
+  volumeMode: Filesystem
+  volumeName: pvc-1758d774-8447-4e57-b913-a4c46477ab00
+  selector:
+    matchLabels:
+      hostname: inertia
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-kafka-zookeeper-1
+  namespace: kafka
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: directpv-min-io
+  volumeMode: Filesystem
+  volumeName: pvc-eb4d7ef6-8a77-47c0-8ddf-2e7897a463e6
+  selector:
+    matchLabels:
+      hostname: force
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-kafka-zookeeper-2
+  namespace: kafka
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: directpv-min-io
+  volumeMode: Filesystem
+  volumeName: pvc-a453ae7a-7001-4a02-a5b3-1f3ab66a313b
+  selector:
+    matchLabels:
+      hostname: reaction

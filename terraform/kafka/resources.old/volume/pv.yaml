@@ -1,0 +1,120 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-68fcf7dc-0610-42a9-a9aa-e685410a2e69
+spec:
+  storageClassName: directpv-min-io
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: direct.csi.min.io
+    volumeHandle: kafkaClusterVolume0
+    readOnly: false
+    fsType: xfs
+  claimRef:
+    name: data-kafka-cluster-0
+    namespace: kafka
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-7246a9a7-2766-4592-89e5-84628935cd5f
+spec:
+  storageClassName: directpv-min-io
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: direct.csi.min.io
+    volumeHandle: kafkaClusterVolume1
+    readOnly: false
+    fsType: xfs
+  claimRef:
+    name: data-kafka-cluster-1
+    namespace: kafka
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-455e0e43-6675-4798-8fa8-763fb37d5f90
+spec:
+  storageClassName: directpv-min-io
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: direct.csi.min.io
+    volumeHandle: kafkaClusterVolume2
+    readOnly: false
+    fsType: xfs
+  claimRef:
+    name: data-kafka-cluster-2
+    namespace: kafka
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-1758d774-8447-4e57-b913-a4c46477ab00
+spec:
+  storageClassName: directpv-min-io
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: direct.csi.min.io
+    volumeHandle: kafkaZookeeperVolume0
+    readOnly: false
+    fsType: xfs
+  claimRef:
+    name: data-kafka-zookeeper-0
+    namespace: kafka
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-eb4d7ef6-8a77-47c0-8ddf-2e7897a463e6
+spec:
+  storageClassName: directpv-min-io
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: direct.csi.min.io
+    volumeHandle: kafkaZookeeperVolume1
+    readOnly: false
+    fsType: xfs
+  claimRef:
+    name: data-kafka-zookeeper-1
+    namespace: kafka
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-a453ae7a-7001-4a02-a5b3-1f3ab66a313b
+spec:
+  storageClassName: directpv-min-io
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: direct.csi.min.io
+    volumeHandle: kafkaZookeeperVolume2
+    readOnly: false
+    fsType: xfs
+  claimRef:
+    name: data-kafka-zookeeper-2
+    namespace: kafka
