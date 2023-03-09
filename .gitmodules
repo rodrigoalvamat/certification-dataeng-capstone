@@ -7,3 +7,6 @@
 [submodule "datadiver/flink"]
 	path = datadiver/flink
 	url = git@github.com:datadiverdev/datadiver-flink.git
+[submodule "datadiver/kafka"]
+	path = datadiver/kafka
+	url = git@github.com:datadiverdev/datadiver-kafka.git
