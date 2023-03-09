@@ -13,3 +13,6 @@
 [submodule "datadiver/minio"]
 	path = datadiver/minio
 	url = git@github.com:datadiverdev/datadiver-minio.git
+[submodule "datadiver/traefik"]
+	path = datadiver/traefik
+	url = git@github.com:datadiverdev/datadiver-traefik.git
