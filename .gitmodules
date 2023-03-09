@@ -1,3 +1,6 @@
 [submodule "datadiver/airflow"]
 	path = datadiver/airflow
 	url = git@github.com:datadiverdev/datadiver-airflow.git
+[submodule "datadiver/cert-manager"]
+	path = datadiver/cert-manager
+	url = git@github.com:datadiverdev/datadiver-cert-manager.git
