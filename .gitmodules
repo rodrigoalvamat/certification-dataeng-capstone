@@ -1,0 +1,3 @@
+[submodule "datadiver/airflow"]
+	path = datadiver/airflow
+	url = git@github.com:datadiverdev/datadiver-airflow.git
