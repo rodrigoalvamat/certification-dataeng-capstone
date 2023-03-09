@@ -4,3 +4,6 @@
 [submodule "datadiver/cert-manager"]
 	path = datadiver/cert-manager
 	url = git@github.com:datadiverdev/datadiver-cert-manager.git
+[submodule "datadiver/flink"]
+	path = datadiver/flink
+	url = git@github.com:datadiverdev/datadiver-flink.git
