@@ -13,3 +13,10 @@ Pipfile.lock
 
 # config
 capstone.cfg
+
+# terraform
+# .terraform
+# .terraform.lock.hcl
+# terraform.tfstate
+# terraform.tfstate.backup
+# secrets.tfvars
