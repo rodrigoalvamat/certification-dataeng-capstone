@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: datadiver-dev
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - "https://airflow.apache.org/"
+    - "https://github.com/datadiverdev/datadiver-airflow.git"
+  destinations:
+    - namespace: "!kube-system"
+      server: "*"
+    - namespace: "*"
+      server: "https://kubernetes.default.svc"

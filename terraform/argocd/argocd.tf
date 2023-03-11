@@ -4,6 +4,10 @@ terraform {
   required_providers {
     helm       = ">= 2.9.0"
     kubernetes = ">= 2.18.1"
+    kubectl    = {
+      source  = "gavinbunney/kubectl"
+      version = ">= 1.14.0"
+    }
   }
 }
 
@@ -27,6 +31,24 @@ resource "helm_release" "argocd" {
   version    = var.chart_version
 
   values = [
-    file("${path.module}/resources/values.yaml")
+    file("${path.module}/resources/helm/values.yaml")
   ]
+}
+
+# Argo-CD projects
+resource "kubectl_manifest" "argocd_projects" {
+  depends_on         = [helm_release.argocd]
+  override_namespace = var.kubernetes_namespace
+
+  for_each  = fileset(path.module, "resources/project/*.yaml")
+  yaml_body = file("${path.module}/${each.value}")
+}
+
+# Argo-CD applications
+resource "kubectl_manifest" "argocd_applications" {
+  depends_on         = [kubectl_manifest.argocd_projects]
+  override_namespace = var.kubernetes_namespace
+
+  for_each  = fileset(path.module, "resources/application/dev/*.yaml")
+  yaml_body = file("${path.module}/${each.value}")
 }

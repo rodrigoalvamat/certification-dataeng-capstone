@@ -103,31 +103,27 @@ global:
   priorityClassName: ""
 
   # -- Default node selector for all components
-  nodeSelector: {}
+  nodeSelector:
+    application.general: "true"
 
   # -- Default tolerations for all components
   tolerations: {}
 
   # Default affinity preset for all components
-  affinity:
+  affinity: {}
     # -- Default pod anti-affinity rules. Either: `none`, `soft` or `hard`
-    podAntiAffinity: soft
+    #podAntiAffinity: soft
     # Node affinity rules
-    nodeAffinity:
+    #nodeAffinity:
       # -- Default node affinity rules. Either: `none`, `soft` or `hard`
-      type: hard
+      #type: hard
       # -- Default match expressions for node affinity
-      matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-            - acceleration
-            - force
-            - inertia
-            - reaction
-            - velocity
-            - unified
-            - everything
+      #matchExpressions:
+        #- key: kubernetes.io/hostname
+          #operator: In
+          #values:
+            #- value1
+            #- value2
 
   # -- Default [TopologySpreadConstraints] rules for all components
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
