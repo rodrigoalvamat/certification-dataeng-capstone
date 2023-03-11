@@ -16,3 +16,6 @@
 [submodule "datadiver/traefik"]
 	path = datadiver/traefik
 	url = git@github.com:datadiverdev/datadiver-traefik.git
+[submodule "datadiver/redpanda"]
+	path = datadiver/redpanda
+	url = git@github.com:datadiverdev/datadiver-redpanda.git
