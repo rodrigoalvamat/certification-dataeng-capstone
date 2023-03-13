@@ -8,10 +8,14 @@ spec:
     - group: '*'
       kind: '*'
   sourceRepos:
-    - "https://airflow.apache.org/"
-    - "https://github.com/datadiverdev/datadiver-airflow.git"
+    - "https://charts.jetstack.io"
+    - "https://github.com/datadiverdev/datadiver-cert-manager.git"
+    - "https://downloads.apache.org/flink/flink-kubernetes-operator-1.4.0"
+    - "https://github.com/datadiverdev/datadiver-flink.git"
+    - "https://charts.redpanda.com"
+    - "https://github.com/datadiverdev/datadiver-redpanda.git"
+    - "https://traefik.github.io/charts"
+    - "https://github.com/datadiverdev/datadiver-traefik.git"
   destinations:
-    - namespace: "!kube-system"
-      server: "*"
     - namespace: "*"
       server: "https://kubernetes.default.svc"

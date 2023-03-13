@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik-dev
+  namespace: traefik
+spec:
+  project: datadiver-dev
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: traefik
+  sources:
+    - repoURL: "https://github.com/datadiverdev/datadiver-traefik.git"
+      targetRevision: dev
+      path: dev/ingress
+    - repoURL: "https://traefik.github.io/charts"
+      chart: traefik
+      targetRevision: 21.2.0
+      helm:
+        valueFiles:
+          - $values/dev/helm/values.yaml
+    - repoURL: "https://github.com/datadiverdev/datadiver-traefik.git"
+      targetRevision: dev
+      ref: values
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

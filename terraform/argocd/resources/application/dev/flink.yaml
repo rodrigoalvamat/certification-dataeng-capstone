@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: flink-dev
+  namespace: flink
+spec:
+  project: datadiver-dev
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: flink
+  sources:
+    - repoURL: "https://downloads.apache.org/flink/flink-kubernetes-operator-1.4.0"
+      chart: flink-kubernetes-operator
+      targetRevision: 1.4.0
+      helm:
+        valueFiles:
+          - $values/dev/helm/values.yaml
+    - repoURL: "https://github.com/datadiverdev/datadiver-flink.git"
+      targetRevision: dev
+      ref: values
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

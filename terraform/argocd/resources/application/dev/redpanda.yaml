@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redpanda-dev
+  namespace: redpanda
+spec:
+  project: datadiver-dev
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: redpanda
+  sources:
+    - repoURL: "https://github.com/datadiverdev/datadiver-redpanda.git"
+      targetRevision: dev
+      path: dev/priority
+    - repoURL: "https://charts.redpanda.com"
+      chart: redpanda
+      targetRevision: 3.0.3
+      helm:
+        valueFiles:
+          - $values/dev/helm/redpanda/values.yaml
+    - repoURL: "https://github.com/datadiverdev/datadiver-redpanda.git"
+      targetRevision: dev
+      ref: values
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
